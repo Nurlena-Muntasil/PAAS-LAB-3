@@ -1,0 +1,154 @@
+[
+    {
+        "id": "8f3e502c.32abe",
+        "type": "tab",
+        "label": "Activity1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "335125e2.f0296a",
+        "type": "tab",
+        "label": "Activity2",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "40b2c58.3750d3c",
+        "type": "inject",
+        "z": "335125e2.f0296a",
+        "name": "Normal",
+        "topic": "",
+        "payload": "Normal",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 290,
+        "y": 120,
+        "wires": [
+            [
+                "1dd1f98f.2fb1e6"
+            ]
+        ]
+    },
+    {
+        "id": "1a067cbb.5c67a3",
+        "type": "inject",
+        "z": "335125e2.f0296a",
+        "name": "Alert",
+        "topic": "",
+        "payload": "Alert",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 290,
+        "y": 280,
+        "wires": [
+            [
+                "1dd1f98f.2fb1e6"
+            ]
+        ]
+    },
+    {
+        "id": "1dd1f98f.2fb1e6",
+        "type": "function",
+        "z": "335125e2.f0296a",
+        "name": "format message",
+        "func": "msg.payload = { \"a\" : { \"indicator\" : msg.payload}};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 510,
+        "y": 180,
+        "wires": [
+            [
+                "3551ce21.3c01a2"
+            ]
+        ]
+    },
+    {
+        "id": "3551ce21.3c01a2",
+        "type": "json",
+        "z": "335125e2.f0296a",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 710,
+        "y": 180,
+        "wires": [
+            [
+                "dc97ea54.92f598"
+            ]
+        ]
+    },
+    {
+        "id": "78924c98.674a34",
+        "type": "ibmiot in",
+        "z": "8f3e502c.32abe",
+        "authentication": "boundService",
+        "apiKey": "",
+        "inputType": "evt",
+        "logicalInterface": "",
+        "ruleId": "",
+        "deviceId": "",
+        "applicationId": "",
+        "deviceType": "+",
+        "eventType": "+",
+        "commandType": "",
+        "format": "json",
+        "name": "IBM IoT",
+        "service": "registered",
+        "allDevices": true,
+        "allApplications": "",
+        "allDeviceTypes": true,
+        "allLogicalInterfaces": "",
+        "allEvents": true,
+        "allCommands": "",
+        "allFormats": "",
+        "qos": 0,
+        "x": 630,
+        "y": 200,
+        "wires": [
+            [
+                "14e66c55.0a7024"
+            ]
+        ]
+    },
+    {
+        "id": "14e66c55.0a7024",
+        "type": "debug",
+        "z": "8f3e502c.32abe",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 880,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "dc97ea54.92f598",
+        "type": "ibmiot out",
+        "z": "335125e2.f0296a",
+        "authentication": "boundService",
+        "apiKey": "",
+        "outputType": "cmd",
+        "deviceId": "0800278823a5",
+        "deviceType": "raspberrypi",
+        "eventCommandType": "statusindicator",
+        "format": "json",
+        "data": "{}",
+        "qos": 0,
+        "name": "IBM IoT",
+        "service": "registered",
+        "x": 900,
+        "y": 180,
+        "wires": []
+    }
+]

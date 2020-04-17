@@ -1,0 +1,112 @@
+[
+    {
+        "id": "cfb1f243.eeb21",
+        "type": "tab",
+        "label": "SenseHat",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "f59269c7.a80728",
+        "type": "delay",
+        "z": "cfb1f243.eeb21",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "5",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 580,
+        "y": 200,
+        "wires": [
+            [
+                "a6f667a1.322068"
+            ]
+        ]
+    },
+    {
+        "id": "a6f667a1.322068",
+        "type": "function",
+        "z": "cfb1f243.eeb21",
+        "name": "Env. Data",
+        "func": "msg.payload = {\"Data\" : {\"Environment\" : msg.payload}};\nmsg.deviceType = \"senseHat\";\nmsg.deviceId = \"senb52212117175\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 780,
+        "y": 220,
+        "wires": [
+            [
+                "34ccd4bc.46e40c",
+                "44300928.313de8"
+            ]
+        ]
+    },
+    {
+        "id": "34ccd4bc.46e40c",
+        "type": "debug",
+        "z": "cfb1f243.eeb21",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1000,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "44300928.313de8",
+        "type": "wiotp out",
+        "z": "cfb1f243.eeb21",
+        "authType": "g",
+        "qs": "false",
+        "qsDeviceId": "",
+        "deviceKey": "7caf6d75.891854",
+        "deviceType": "",
+        "deviceId": "",
+        "event": "event",
+        "format": "json",
+        "qos": "",
+        "name": "IBM IoT Device",
+        "x": 1000,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "f8429a13.96e4a8",
+        "type": "rpi-sensehatsim in",
+        "z": "cfb1f243.eeb21",
+        "name": "",
+        "motion": false,
+        "env": true,
+        "stick": false,
+        "x": 340,
+        "y": 200,
+        "wires": [
+            [
+                "f59269c7.a80728"
+            ]
+        ]
+    },
+    {
+        "id": "7caf6d75.891854",
+        "type": "wiotp-credentials",
+        "z": "",
+        "name": "",
+        "org": "3gn4cv",
+        "serverName": "",
+        "devType": "raspberrypiGW",
+        "devId": "52212117175",
+        "keepalive": "60",
+        "cleansession": true,
+        "tls": "",
+        "usetls": false
+    }
+]
